@@ -6,13 +6,13 @@ var tableData = data;
     console.log("is this working");
   //  console.log(tableData[0]);
     console.log(Object.keys(tableData[0]));
- //testing using forEach loop   
-    tableData.forEach(function(object) {
-        test = object.state
-        if (test.toLowerCase() === "nm") {
-            console.log(object);
-        };
-    });
+ //testing using forEach loop to make certain have data transferring and can filter - show on console  
+    // tableData.forEach(function(object) {
+    //     test = object.state
+    //     if (test.toLowerCase() === "nm") {
+    //         console.log(object);
+    //     };
+    // });
 
 //testing using filter function
     filterData = tableData.filter(object => object.state === "ar");
@@ -22,12 +22,7 @@ var tableData = data;
 const uniqueDate = [... new Set(tableData.map(object => object.datetime))]
 console.log(uniqueDate)
 
-// // Step 2:  Use d3 to append one table row `tr` for each weather report object
-// // Don't worry about adding cells or text yet, just try appending the `tr` elements.
-//  tableData.forEach(function(oject) {
-//     var row = tbody.append("tr");
-//     });
-
+//writing entire dataset to table
 tableData.forEach((object) => {
     var row = tbody.append("tr");
     Object.entries(object).forEach(([key, value]) => {
