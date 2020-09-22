@@ -30,3 +30,8 @@ tableData.forEach((object) => {
       cell.text(value);
     });
   });
+
+  var inputDate = d3.select(".form-control").text();
+  
+  
+  console.log(`Date says ${inputDate}`);
