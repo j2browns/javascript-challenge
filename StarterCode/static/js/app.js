@@ -13,8 +13,8 @@ var oRows = document.getElementById('ufo-table').getElementsByTagName('tr');
 var iRowCount = oRows.length;
 
 console.log('Your table has ' + iRowCount + ' rows.');
-//var inputDate = d3.select("#form"); //check form
-//inputDate.on("submit",dateFilter); //if form submitted then go to dateFilter
+var inputDate = d3.select("#form"); //check form
+inputDate.on("submit",dataFilter); //if form submitted then go to dateFilter
 
 var button = d3.select("#filter-btn");//check button
 button.on("click", dataFilter);
@@ -53,27 +53,39 @@ function dataFilter() {
   console.log(inputDate);
 
   var inputElement = d3.select("#city");
-  var inputCity = inputElement.property("value");
+  var inputCity = (inputElement.property("value")).toLowerCase();
   console.log(inputCity);
 
   var inputElement = d3.select("#state");
-  var inputState = inputElement.property("value");
+  var inputState = (inputElement.property("value")).toLowerCase();
   console.log(inputState);
+
+  var inputElement = d3.select("#shape");
+  var inputShape = (inputElement.property("value")).toLowerCase();
+  console.log(inputShape);
 
 
   //filter data based on date field
   if (inputDate != "") {
     filterData = tableData.filter(object => object.datetime === inputDate);
-    console.log(filterData); //show in console filtered data
+    //console.log(filterData); //show in console filtered data
   }
   else {
     filterData = tableData;
   };
   if (inputCity != "") {
     filterData = filterData.filter(object => object.city === inputCity);
-    console.log(filterData); //show in console filtered data
+    //console.log(filterData); //show in console filtered data
+  };
+  if (inputState != "") {
+    filterData = filterData.filter(object => object.state === inputState);
+    //console.log(filterData); //show in console filtered data
   };
 
+  if (inputShape != "") {
+    filterData = filterData.filter(object => object.shape === inputShape);
+    //console.log(filterData); //show in console filtered data
+  };
 
   //filling in table - was cleared earlier in function
   //replacing table headings that were cleared
