@@ -6,14 +6,7 @@ var tableData = data;
     console.log("is this working");//verify connection to html code
 
 //initial filling in table no filter
-var tbody = d3.select("tbody");
-tableData.forEach((object) => {
-  var row = tbody.append("tr");
-  Object.entries(object).forEach(([key, value]) => {
-    var cell = row.append("td");
-    cell.text(value);
-  });
-});
+fullTable();
 
 
 var oRows = document.getElementById('ufo-table').getElementsByTagName('tr');
@@ -24,17 +17,22 @@ console.log('Your table has ' + iRowCount + ' rows.');
 //inputDate.on("submit",dateFilter); //if form submitted then go to dateFilter
 
 var button = d3.select("#filter-btn");//check button
-button.on("click", dateFilter);
+button.on("click", dataFilter);
 
-//Function below finds lenght of table on web page
+
+//*********************************************************************************/
+//***************  Area below for Functions used in Code           ****************/
+
+
+//Function#1 -  finds lenght of table on web page
 function tableLength() {
   var oRows = document.getElementById('ufo-table').getElementsByTagName('tr');
   var iRowCount = oRows.length;
   return iRowCount;
 };
 
-
-function dateFilter() {
+//Function#2 - filters data with inputted filters
+function dataFilter() {
   d3.event.preventDefault();
   
   //finding initial length of table and sending to console for trouble shooting
@@ -88,7 +86,6 @@ function dateFilter() {
   for (i = 0; i<tableHeading.length; i++) {
     var cell = row.append("th");
     cell.text(tableHeading[i]);
-
   };
 
   var tbody = d3.select("tbody");
@@ -102,9 +99,19 @@ function dateFilter() {
   });
   rowCount = tableLength();
   console.log(`Table Length at End: ${rowCount}`);
-
 };
 
+//Function to fully populate table
+function fullTable() {
+  var tbody = d3.select("tbody");
+  tableData.forEach((object) => {
+    var row = tbody.append("tr");
+    Object.entries(object).forEach(([key, value]) => {
+      var cell = row.append("td");
+      cell.text(value);
+    });
+  });
+};
 // const uniqueDate = [... new Set(tableData.map(object => object.datetime))]
 // console.log(uniqueDate)
 

@@ -98,10 +98,11 @@ select {
   padding: 20px;
   margin: 0;
   background: black;
-  background-image: url("../images/nasa.jpg");
+  background-image: url("../images/mars_attacks2.jpg");
   background-attachment: fixed;
   background-position: bottom center;
   background-size: cover;
+  color:whitesmoke;
 }
 
 .hero h1 {
