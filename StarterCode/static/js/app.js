@@ -23,7 +23,7 @@ button.on("click", dataFilter);
 //*********************************************************************************/
 //***************  Area below for Functions used in Code           ****************/
 
-
+//*********************************************************************************/
 //Function#1 -  finds lenght of table on web page
 function tableLength() {
   var oRows = document.getElementById('ufo-table').getElementsByTagName('tr');
@@ -31,6 +31,7 @@ function tableLength() {
   return iRowCount;
 };
 
+//*********************************************************************************/
 //Function#2 - filters data with inputted filters
 function dataFilter() {
   d3.event.preventDefault();
@@ -73,12 +74,9 @@ function dataFilter() {
     console.log(filterData); //show in console filtered data
   };
 
-  
-  // filterData = tableData.filter(object => object.datetime === inputDate);
-  // console.log(filterData); //show in console filtered data
-  
-  //filling in table
 
+  //filling in table - was cleared earlier in function
+  //replacing table headings that were cleared
   var tableHeading = ["Date", "City", "State", "Country", "Shape", "Duration", "Comments"];
 
   var thead = d3.select("thead");
@@ -88,6 +86,7 @@ function dataFilter() {
     cell.text(tableHeading[i]);
   };
 
+  //putting data into table
   var tbody = d3.select("tbody");
     
   filterData.forEach((object) => {
@@ -101,7 +100,8 @@ function dataFilter() {
   console.log(`Table Length at End: ${rowCount}`);
 };
 
-//Function to fully populate table
+//*********************************************************************************/
+//Function 3 - fully populate table
 function fullTable() {
   var tbody = d3.select("tbody");
   tableData.forEach((object) => {
