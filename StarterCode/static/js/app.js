@@ -4,12 +4,46 @@
 // from data.js
 var tableData = data;
     console.log("is this working");//verify connection to html code
-  
-var inputDate = d3.select("#form"); //check form
-inputDate.on("submit",dateFilter); //if form submitted then go to dateFilter
+
+//initial filling in table no filter
+var tbody = d3.select("tbody");
+tableData.forEach((object) => {
+  var row = tbody.append("tr");
+  Object.entries(object).forEach(([key, value]) => {
+    var cell = row.append("td");
+    cell.text(value);
+  });
+});
+
+
+var oRows = document.getElementById('ufo-table').getElementsByTagName('tr');
+var iRowCount = oRows.length;
+
+console.log('Your table has ' + iRowCount + ' rows.');
+//var inputDate = d3.select("#form"); //check form
+//inputDate.on("submit",dateFilter); //if form submitted then go to dateFilter
+
+
+var button = d3.select("#filter-btn");//check button
+button.on("click", dateFilter);
+
+function tableLength() {
+  var oRows = document.getElementById('ufo-table').getElementsByTagName('tr');
+  var iRowCount = oRows.length;
+  return iRowCount;
+};
 
 function dateFilter() {
   d3.event.preventDefault();
+  
+  rowCount = tableLength();
+  console.log(`Table Length at start: ${rowCount}`);
+  for (i=0; i<rowCount; i++) {
+    document.getElementById('ufo-table').deleteRow(0);
+  };
+  rowCount = tableLength();
+  console.log(`Table Length after clean: ${rowCount}`);
+  
   console.log("went to function");
   var inputElement = d3.select("#datetime");
   var inputValue = inputElement.property("value");
@@ -28,8 +62,10 @@ function dateFilter() {
       cell.text(value);
     });
   });
-};
+  rowCount = tableLength();
+  console.log(`Table Length at End: ${rowCount}`);
 
+};
 
 // const uniqueDate = [... new Set(tableData.map(object => object.datetime))]
 // console.log(uniqueDate)
