@@ -1,13 +1,22 @@
-// Get a reference to the table body
-//var tbody = d3.select("tbody");
+//Week 14 Homework - Introduction to Javascript
 
-// from data.js
+//Collecting data from data.js
 var tableData = data;
-    console.log("is this working");//verify connection to html code
+
+console.log("is this working");//verify connection to html code
 
 //initial filling in table no filter
 fullTable();
 
+//get list of unique values
+var uniqueDate = [... new Set(tableData.map(object => object.datetime))];
+var uniqueCity = [... new Set(tableData.map(object => object.city))];
+var uniqueState = [... new Set(tableData.map(object => object.state))];
+var uniqueShape = [... new Set(tableData.map(object => object.shape))];
+console.log(uniqueDate);
+console.log(uniqueCity);
+console.log(uniqueState);
+console.log(uniqueShape);
 
 var oRows = document.getElementById('ufo-table').getElementsByTagName('tr');
 var iRowCount = oRows.length;
@@ -19,6 +28,8 @@ inputDate.on("submit",dataFilter); //if form submitted then go to dateFilter
 var button = d3.select("#filter-btn");//check button
 button.on("click", dataFilter);
 
+var resetButton = d3.select("#reset-btn");
+resetButton.on("click", fullTable);
 
 //*********************************************************************************/
 //***************  Area below for Functions used in Code           ****************/
@@ -115,6 +126,11 @@ function dataFilter() {
 //*********************************************************************************/
 //Function 3 - fully populate table
 function fullTable() {
+  rowCount = tableLength();
+  //clearing any contents that already exist so don't add to existing table
+  for (i=0; i<rowCount; i++) {
+    document.getElementById('ufo-table').deleteRow(0);//delete first row and repeat for number of rows in table
+  };
   var tbody = d3.select("tbody");
   tableData.forEach((object) => {
     var row = tbody.append("tr");
@@ -124,6 +140,9 @@ function fullTable() {
     });
   });
 };
+
+
+
 // const uniqueDate = [... new Set(tableData.map(object => object.datetime))]
 // console.log(uniqueDate)
 
