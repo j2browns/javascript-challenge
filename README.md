@@ -11,7 +11,8 @@ In this project I did the following:
 4. Two buttons are included - one for filtering data (using the set criteria) and also for show all data.
 5. The code checks the number of rows in the table (excluding the header) and shows the number of sightings in the table (above the buttons in the form).
 6. Also it was discovered that whenever the table was updated it was appending the new data to the end of the table. It was therefore necessary to clear the table before re-writing the table.
+7. When the html page is first loaded it automatically populates will all available data.
 
 In addition to the above additions to the code the background image was also changed to a picture of the aliens landing on earth (Mars Attacks!).
 
-To run the code you should have to run the index.html file in live server from visual code studio.
+To run the code you should have to run the index.html file in live server from visual code studio. The table will only update when the filter button is depressed, taking all the filter parameters at the same time.  The filter parameters are not cleared.
