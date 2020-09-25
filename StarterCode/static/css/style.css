@@ -43,6 +43,11 @@ body {
   margin: 0;
 }
 
+/* format buttons in form */
+.filter-btn{
+  background: #1b3146;
+}
+
 /* This CSS styles the ufo icon in the navbar */
 .nav-ufo {
   position: absolute;

@@ -49,14 +49,24 @@
                         <input class="form-control" id="state" type="text" placeholder="state">
                       </li>
                       <li class="filter list-group-item">
-                        <label for="state">Enter a Shape</label>
-                        <input class="form-control" id="shape" type="text" placeholder="shape">
+                        <label for = "selectOption">Shape:</label>
+                        <select name = "shape" id="selectOption">
+                        </select>
                       </li>
                     </ul>
+                    <center>
+                      <span id = "num_sight"><p></p></span>
+                    </center>
                   </div>
-                  <button id="filter-btn" type="button" class="btn btn-default">Filter Table</button>
-                  <button id="reset-btn" type="button" class="btn btn-default">All Data</button>
-                </form>
+                  <center>
+                    <button id="filter-btn" type="button" class="btn btn-info">Filter Table</button>
+                  </center>
+                  <p><br></p>
+                  <center>
+                    <button id="reset-btn" type="button" class="btn btn-info">Show<br>All Data</button>
+                  </center>
+                  <p><br></p>
+                  </form>
               </div>
             </div>
           </aside>

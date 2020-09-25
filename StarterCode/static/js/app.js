@@ -1,4 +1,8 @@
 //Week 14 Homework - Introduction to Javascript
+//Code takes data in data.js on UFO sightings
+//Displays in table in html and allows user to filter data based on date, city, state and/or shape.
+//Shape is set in a pull down menu.  The values are found by creating an array of all the unique shapes.
+
 
 //Collecting data from data.js
 var tableData = data;
@@ -7,21 +11,22 @@ console.log("is this working");//verify connection to html code
 
 //initial filling in table no filter
 fullTable();
-
-//get list of unique values
-var uniqueDate = [... new Set(tableData.map(object => object.datetime))];
-var uniqueCity = [... new Set(tableData.map(object => object.city))];
-var uniqueState = [... new Set(tableData.map(object => object.state))];
-var uniqueShape = [... new Set(tableData.map(object => object.shape))];
-console.log(uniqueDate);
-console.log(uniqueCity);
-console.log(uniqueState);
-console.log(uniqueShape);
-
+//getting number of elements in table
 var oRows = document.getElementById('ufo-table').getElementsByTagName('tr');
 var iRowCount = oRows.length;
 
 console.log('Your table has ' + iRowCount + ' rows.');
+
+//get list of unique values for shape
+//this list is used to populate a drop down list of shapes
+var uniqueShape = [... new Set(tableData.map(object => object.shape))];
+console.log(uniqueShape);
+//Function populated pull down with array contents
+selectPopMenu(uniqueShape);
+
+var numSightings = d3.select("#num_sight");
+numSightings.text(`Sightnings: ${iRowCount-1}`);
+
 var inputDate = d3.select("#form"); //check form
 inputDate.on("submit",dataFilter); //if form submitted then go to dateFilter
 
@@ -71,10 +76,15 @@ function dataFilter() {
   var inputState = (inputElement.property("value")).toLowerCase();
   console.log(inputState);
 
-  var inputElement = d3.select("#shape");
-  var inputShape = (inputElement.property("value")).toLowerCase();
-  console.log(inputShape);
+  // var inputElement = d3.select("#shape");
+  // var inputShape = (inputElement.property("value")).toLowerCase();
+  // console.log(inputShape);
 
+  var dropdownMenu = d3.selectAll("#selectOption").node();
+  var inputShape = dropdownMenu.value;
+  if (inputShape === "-None-") {
+    inputShape = "";
+  };
 
   //filter data based on date field
   if (inputDate != "") {
@@ -121,6 +131,8 @@ function dataFilter() {
   });
   rowCount = tableLength();
   console.log(`Table Length at End: ${rowCount}`);
+  var numSightings = d3.select("#num_sight");
+  numSightings.text(`Sightnings: ${rowCount-1}`);
 };
 
 //*********************************************************************************/
@@ -131,6 +143,15 @@ function fullTable() {
   for (i=0; i<rowCount; i++) {
     document.getElementById('ufo-table').deleteRow(0);//delete first row and repeat for number of rows in table
   };
+  
+  var tableHeading = ["Date", "City", "State", "Country", "Shape", "Duration", "Comments"];
+  var thead = d3.select("thead");
+  var row = thead.append("tr");
+  for (i = 0; i<tableHeading.length; i++) {
+    var cell = row.append("th");
+    cell.text(tableHeading[i]);
+  };
+  
   var tbody = d3.select("tbody");
   tableData.forEach((object) => {
     var row = tbody.append("tr");
@@ -141,6 +162,24 @@ function fullTable() {
   });
 };
 
+//Function 4 - populate shape pull down
+function selectPopMenu(arrayList) {
+
+var selectMenu = d3.select("select");
+var row = selectMenu.append("option");
+row.text("-None-");
+for (i = 0; i<arrayList.length; i++) {
+  var row = selectMenu.append("option");
+  //row.value(i);
+  row.text(arrayList[i]);
+      };
+rowCount = tableLength();
+console.log(`Table Length at End: ${rowCount}`);
+var numSightings = d3.select("#num_sight");
+numSightings.text(`Sightnings: ${rowCount-1}`);
+
+};
+  
 
 
 // const uniqueDate = [... new Set(tableData.map(object => object.datetime))]
