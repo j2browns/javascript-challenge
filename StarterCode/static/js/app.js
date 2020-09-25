@@ -15,6 +15,11 @@ fullTable();
 var oRows = document.getElementById('ufo-table').getElementsByTagName('tr');
 var iRowCount = oRows.length;
 
+//writing number of elements to the table
+var numSightings = d3.select("#num_sight");
+numSightings.text(`Sightnings: ${iRowCount-1}`);
+
+//writing to console to help trouble shoot 
 console.log('Your table has ' + iRowCount + ' rows.');
 
 //get list of unique values for shape
@@ -24,11 +29,6 @@ console.log(uniqueShape);
 //Function populated pull down with array contents
 selectPopMenu(uniqueShape);
 
-var numSightings = d3.select("#num_sight");
-numSightings.text(`Sightnings: ${iRowCount-1}`);
-
-var inputDate = d3.select("#form"); //check form
-inputDate.on("submit",dataFilter); //if form submitted then go to dateFilter
 
 var button = d3.select("#filter-btn");//check button
 button.on("click", dataFilter);
@@ -50,59 +50,65 @@ function tableLength() {
 //*********************************************************************************/
 //Function#2 - filters data with inputted filters
 function dataFilter() {
-  d3.event.preventDefault();
+  d3.event.preventDefault();//prevent page from refreshing and clearing changes
   
   //finding initial length of table and sending to console for trouble shooting
   rowCount = tableLength();
   console.log(`Table Length at start: ${rowCount}`);
+
   //clearing any contents that already exist so don't add to existing table
   for (i=0; i<rowCount; i++) {
     document.getElementById('ufo-table').deleteRow(0);//delete first row and repeat for number of rows in table
   };
-  //finding table length after clearing - should be 0 and show in console
+
+  //finding table length after clearing - should be 0 and show in console for troubleshooting
   rowCount = tableLength();
   console.log(`Table Length after clean: ${rowCount}`);
   
-  //Getting date and putting on console
+  //Getting date from filter box 
   var inputElement = d3.select("#datetime");
   var inputDate = inputElement.property("value");
-  console.log(inputDate);
+  //console.log(inputDate);
 
+  //Getting the city from the filter box
   var inputElement = d3.select("#city");
   var inputCity = (inputElement.property("value")).toLowerCase();
-  console.log(inputCity);
+  //console.log(inputCity);
 
+  //Getting the state from teh filter box
   var inputElement = d3.select("#state");
   var inputState = (inputElement.property("value")).toLowerCase();
-  console.log(inputState);
+  //console.log(inputState);
 
-  // var inputElement = d3.select("#shape");
-  // var inputShape = (inputElement.property("value")).toLowerCase();
-  // console.log(inputShape);
-
+  //Getting the selected shape from the pull down.  If value is -None- then none selected
   var dropdownMenu = d3.selectAll("#selectOption").node();
   var inputShape = dropdownMenu.value;
   if (inputShape === "-None-") {
     inputShape = "";
   };
 
-  //filter data based on date field
+  //filter data based on date field.  If no value then skip filtering but assign filterData value to tableData
   if (inputDate != "") {
-    filterData = tableData.filter(object => object.datetime === inputDate);
+    var filterData = tableData.filter(object => object.datetime === inputDate);
     //console.log(filterData); //show in console filtered data
   }
   else {
-    filterData = tableData;
+    var filterData = tableData;
   };
+
+  //filter data based on inputCity
   if (inputCity != "") {
     filterData = filterData.filter(object => object.city === inputCity);
     //console.log(filterData); //show in console filtered data
   };
+
+  //Filter data based on state
   if (inputState != "") {
     filterData = filterData.filter(object => object.state === inputState);
     //console.log(filterData); //show in console filtered data
   };
 
+  //filter data based on shape
   if (inputShape != "") {
     filterData = filterData.filter(object => object.shape === inputShape);
     //console.log(filterData); //show in console filtered data
@@ -129,6 +135,8 @@ function dataFilter() {
       cell.text(value);
     });
   });
+
+  //Getting number of objects in table and writing to screen
   rowCount = tableLength();
   console.log(`Table Length at End: ${rowCount}`);
   var numSightings = d3.select("#num_sight");
@@ -138,12 +146,13 @@ function dataFilter() {
 //*********************************************************************************/
 //Function 3 - fully populate table
 function fullTable() {
+
   rowCount = tableLength();
   //clearing any contents that already exist so don't add to existing table
   for (i=0; i<rowCount; i++) {
     document.getElementById('ufo-table').deleteRow(0);//delete first row and repeat for number of rows in table
   };
-  
+  //Writing table headings that are removed when clearing the table.
   var tableHeading = ["Date", "City", "State", "Country", "Shape", "Duration", "Comments"];
   var thead = d3.select("thead");
   var row = thead.append("tr");
@@ -151,7 +160,7 @@ function fullTable() {
     var cell = row.append("th");
     cell.text(tableHeading[i]);
   };
-  
+  //Writing table data - create row, then write each data (td) from object in array
   var tbody = d3.select("tbody");
   tableData.forEach((object) => {
     var row = tbody.append("tr");
@@ -160,53 +169,31 @@ function fullTable() {
       cell.text(value);
     });
   });
+  //Getting number of objects in table and writing to screen
+  rowCount = tableLength();
+  console.log(`Table Length at End: ${rowCount}`);
+  var numSightings = d3.select("#num_sight");
+  numSightings.text(`Sightnings: ${rowCount-1}`);
 };
 
+//*********************************************************************************/
 //Function 4 - populate shape pull down
 function selectPopMenu(arrayList) {
 
-var selectMenu = d3.select("select");
-var row = selectMenu.append("option");
-row.text("-None-");
-for (i = 0; i<arrayList.length; i++) {
+  //select the "select" callout in html
+  var selectMenu = d3.select("select");
+  //append option under select
   var row = selectMenu.append("option");
-  //row.value(i);
-  row.text(arrayList[i]);
-      };
-rowCount = tableLength();
-console.log(`Table Length at End: ${rowCount}`);
-var numSightings = d3.select("#num_sight");
-numSightings.text(`Sightnings: ${rowCount-1}`);
+  //filling text field for option
+  row.text("-None-");
+  for (i = 0; i<arrayList.length; i++) {
+    var row = selectMenu.append("option");
+    //populate list value for select menue from arrayList passed to function
+    row.text(arrayList[i]);
+        };
+
 
 };
   
 
 
-// const uniqueDate = [... new Set(tableData.map(object => object.datetime))]
-// console.log(uniqueDate)
-
-
-// var inputDate = d3.select("#form");
-
-// inputDate.on("submit",dateFilter);
-// console.log(`Date says ${inputDate}`);
-
-// var inputElement = d3.select("#datetime");
-
-
-
-
-
-//testing using filter function
-    // filterData = tableData.filter(object => object.state === "ar");
-    // console.log(filterData);
-// getting unique listing of values
-
-//writing entire dataset to table
-// tableData.forEach((object) => {
-//     var row = tbody.append("tr");
-//     Object.entries(object).forEach(([key, value]) => {
-//       var cell = row.append("td");
-//       cell.text(value);
-//     });
-//   });
