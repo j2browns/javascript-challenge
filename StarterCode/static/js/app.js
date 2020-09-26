@@ -25,7 +25,7 @@ console.log('Your table has ' + iRowCount + ' rows.');
 //get list of unique values for shape
 //this list is used to populate a drop down list of shapes
 var uniqueShape = [... new Set(tableData.map(object => object.shape))];
-console.log(uniqueShape);
+//console.log(uniqueShape);
 //Function populated pull down with array contents
 selectPopMenu(uniqueShape);
 
@@ -146,7 +146,9 @@ function dataFilter() {
 //*********************************************************************************/
 //Function 3 - fully populate table
 function fullTable() {
-
+  
+  //clears form back to default filter values
+  document.getElementById("form").reset();
   rowCount = tableLength();
   //clearing any contents that already exist so don't add to existing table
   for (i=0; i<rowCount; i++) {
@@ -194,6 +196,10 @@ function selectPopMenu(arrayList) {
 
 
 };
+
+//Function 5 - clear filter fields
+var inputElement = d3.select("#datetime");
+var inputDate = inputElement.text("");
   
 
 
