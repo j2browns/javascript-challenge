@@ -8,6 +8,7 @@
 //Function 2 - filters data with inputted filters
 //Function 3 - fully populate table (when hit all data button or start page)
 //Function 4 - populate shape pull down/select menu
+//Function 5 - write table data and header
 
 //Collecting data from data.js
 var tableData = data;
@@ -160,7 +161,7 @@ function selectPopMenu(arrayList) {
 
 
 };
-
+//*********************************************************************************/
 //Function 5 - write table data and header
 function popTable(dataList) {
 
