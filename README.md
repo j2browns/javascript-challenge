@@ -16,4 +16,4 @@ In this project I did the following:
 
 In addition to the above additions to the code the background image was also changed to a picture of the aliens landing on earth (Mars Attacks!).
 
-To run the code you should have to run the index.html file in live server from visual code studio. The table will only update when the filter button is depressed, taking all the filter parameters at the same time.  The filter parameters are not cleared.
+To run the code you should have to run the index.html file in live server from visual code studio. The file is located in the starter code directory.  The table will only update when the filter button is depressed, taking all the filter parameters at the same time.  The filter parameters are not cleared.
