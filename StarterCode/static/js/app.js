@@ -173,7 +173,6 @@ function fullTable() {
   });
   //Getting number of objects in table and writing to screen
   rowCount = tableLength();
-  console.log(`Table Length at End: ${rowCount}`);
   var numSightings = d3.select("#num_sight");
   numSightings.text(`Sightnings: ${rowCount-1}`);
 };
@@ -197,9 +196,7 @@ function selectPopMenu(arrayList) {
 
 };
 
-//Function 5 - clear filter fields
-var inputElement = d3.select("#datetime");
-var inputDate = inputElement.text("");
+
   
 
 
