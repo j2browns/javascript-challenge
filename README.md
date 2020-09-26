@@ -9,9 +9,10 @@ In this project I did the following:
 3. The shape filtering is performed via a select box.  The values in the select box were obtained by finding all the unique values in the data set using the following code: 
 `var uniqueShape = [... new Set(tableData.map(object => object.shape))];` where tableData is the original data list.
 4. Two buttons are included - one for filtering data (using the set criteria) and also for show all data.
-5. The code checks the number of rows in the table (excluding the header) and shows the number of sightings in the table (above the buttons in the form).
-6. Also it was discovered that whenever the table was updated it was appending the new data to the end of the table. It was therefore necessary to clear the table before re-writing the table.
-7. When the html page is first loaded it automatically populates will all available data.
+5. When the `show all data` button is selected the form fields for the filtering are also reset to the initial conditions.
+6. The code checks the number of rows in the table (excluding the header) and shows the number of sightings in the table (above the buttons in the form).
+7. Also it was discovered that whenever the table was updated it was appending the new data to the end of the table. It was therefore necessary to clear the table before re-writing the table.
+8. When the html page is first loaded it automatically populates will all available data.
 
 In addition to the above additions to the code the background image was also changed to a picture of the aliens landing on earth (Mars Attacks!).
 
